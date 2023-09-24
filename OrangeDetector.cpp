@@ -6,7 +6,7 @@ using namespace cv;
 
 int main(int argc, char** argv) {
 
-    // Load the video file
+    // Load the video file on 0th camera
     VideoCapture cap(0);
 
     // Check if the video file was opened successfully
@@ -19,13 +19,16 @@ int main(int argc, char** argv) {
     namedWindow("Img", WINDOW_NORMAL);
     namedWindow("Mask", WINDOW_NORMAL);
 
+    // initialization of img matrices
     Mat hsvImg;
     Mat inRangeImg;
     Mat mask;
     Mat dilateImg;
 
+    // hmin, smin, vmin, hmax, smax, vmax
     vector<int> rangeValues = {3, 149, 95, 13, 230, 228};
 
+    // --------- uncomment to change hsv threshold values ---------
     // namedWindow("Trackbars", WINDOW_AUTOSIZE);
     // for(int i = 0; i < rangeValues.size(); i++){
     //     createTrackbar(to_string(i), "Trackbars", &rangeValues[i], 255, NULL);
@@ -43,15 +46,19 @@ int main(int argc, char** argv) {
         }
         // convert RGV to HSV
         cvtColor(img, hsvImg, COLOR_BGR2HSV);
+        // lower hsv threshold
         Scalar lower(rangeValues[0], rangeValues[1], rangeValues[2]);
+        // upper hsv threshold
         Scalar upper(rangeValues[3], rangeValues[4], rangeValues[5]);
+        // applies threshold to new mask matrix
         inRange(hsvImg, lower, upper, mask);
 
         // Display the current frame in the window
         imshow("Img", img);
+        // Display mask
         imshow("Mask", mask);
 
-        // Wait for a key press (or 30 milliseconds) to allow the frame to be displayed
+        // Change waitKey value to make it faster / slower
         if (waitKey(100) >= 0) {
             break;
         }

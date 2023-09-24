@@ -15,22 +15,19 @@ int main(int argc, char** argv) {
         return -1;
     }
 
-    // Create a window to display the video frames
-    namedWindow("Img", WINDOW_NORMAL);
-    namedWindow("Mask", WINDOW_NORMAL);
-
     // initialization of img matrices
     Mat hsvImg;
     Mat mask;
+    Mat blurImg;
 
     // hmin, smin, vmin, hmax, smax, vmax
     vector<int> rangeValues = {3, 149, 95, 13, 230, 228};
 
     // --------- uncomment to change hsv threshold values ---------
-    // namedWindow("Trackbars", WINDOW_AUTOSIZE);
-    // for(int i = 0; i < rangeValues.size(); i++){
-    //     createTrackbar(to_string(i), "Trackbars", &rangeValues[i], 255, NULL);
-    // }
+    namedWindow("Trackbars", WINDOW_AUTOSIZE);
+    for(int i = 0; i < rangeValues.size(); i++){
+        createTrackbar(to_string(i), "Trackbars", &rangeValues[i], 255, NULL);
+    }
 
     // Loop over the video frames and display them in the window
     while (true) {
@@ -52,13 +49,16 @@ int main(int argc, char** argv) {
         // applies threshold to new mask matrix
         inRange(hsvImg, lower, upper, mask);
 
+        blur(mask, blurImg, Size(15, 15));
+
         // Display the current frame in the window
         // imshow("Img", img);
         // Display mask
         imshow("Mask", mask);
+        imshow("Blur", blurImg);
 
         // Change waitKey value to make it faster / slower
-        if (waitKey(1) >= 0) {
+        if (waitKey(100) >= 0) {
             break;
         }
     }

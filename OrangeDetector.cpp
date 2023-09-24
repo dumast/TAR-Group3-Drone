@@ -21,9 +21,7 @@ int main(int argc, char** argv) {
 
     // initialization of img matrices
     Mat hsvImg;
-    Mat inRangeImg;
     Mat mask;
-    Mat dilateImg;
 
     // hmin, smin, vmin, hmax, smax, vmax
     vector<int> rangeValues = {3, 149, 95, 13, 230, 228};
@@ -46,6 +44,7 @@ int main(int argc, char** argv) {
         }
         // convert RGV to HSV
         cvtColor(img, hsvImg, COLOR_BGR2HSV);
+
         // lower hsv threshold
         Scalar lower(rangeValues[0], rangeValues[1], rangeValues[2]);
         // upper hsv threshold
@@ -54,12 +53,12 @@ int main(int argc, char** argv) {
         inRange(hsvImg, lower, upper, mask);
 
         // Display the current frame in the window
-        imshow("Img", img);
+        // imshow("Img", img);
         // Display mask
         imshow("Mask", mask);
 
         // Change waitKey value to make it faster / slower
-        if (waitKey(100) >= 0) {
+        if (waitKey(1) >= 0) {
             break;
         }
     }

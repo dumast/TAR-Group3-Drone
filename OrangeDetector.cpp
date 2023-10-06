@@ -55,10 +55,10 @@ int main(int argc, char** argv) {
         // imshow("Img", img);
         // Display mask
         imshow("Mask", mask);
-        imshow("Blur", blurImg);
+        // imshow("Blur", blurImg);
 
         // Change waitKey value to make it faster / slower
-        if (waitKey(100) >= 0) {
+        if (waitKey(10) >= 0) {
             break;
         }
     }

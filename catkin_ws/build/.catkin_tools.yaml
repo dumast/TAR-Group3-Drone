@@ -1,0 +1,6 @@
+devel_space: /home/eric/TAR-Group3-Drone/catkin_ws/devel
+install: false
+install_space: /home/eric/TAR-Group3-Drone/catkin_ws/install
+profile: default
+source_space: /home/eric/TAR-Group3-Drone/catkin_ws/src
+workspace: /home/eric/TAR-Group3-Drone/catkin_ws

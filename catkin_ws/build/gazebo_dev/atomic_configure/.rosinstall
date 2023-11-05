@@ -1,0 +1,2 @@
+- setup-file:
+    local-name: /home/eric/TAR-Group3-Drone/catkin_ws/devel/.private/gazebo_dev/setup.sh
